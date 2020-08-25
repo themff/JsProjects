@@ -200,7 +200,7 @@ nav {
 }
 .links {
   height: 0;
-  overflow: hidden;
+  overflow: hidden; /*with this i can hide the links when the window is tiny */
   transition: var(--transition);
 }
 .show-links {
