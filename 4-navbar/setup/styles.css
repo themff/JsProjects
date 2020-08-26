@@ -200,13 +200,15 @@ nav {
 }
 .links {
   height: 0;
-  overflow: hidden; /*with this i can hide the links when the window is tiny */
+  overflow: hidden; /*with this class i can hide the links when the window is tiny */
   transition: var(--transition);
 }
+
+/*toggle class */
 .show-links {
   height: 10rem;
 }
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 800px) { /* esto es lo responsive */
   .nav-center {
     max-width: 1170px;
     margin: 0 auto;
@@ -222,7 +224,7 @@ nav {
     display: none;
   }
   .links {
-    height: auto;
+    height: auto; /*importante que la altura de los links quede en auto */
     display: flex;
   }
   .links a {
