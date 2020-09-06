@@ -72,3 +72,30 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+
+const sectionCenter = document.querySelector(".section-center"); //este query selecciona al padre de todos mis menúes. Sería el contenedor
+
+window.addEventListener("DOMContentLoaded",function(){
+  //console.log("shake and bake");  //cuando carga la página (por eso selecciona el evento del window y mira el domcontentloader), impripe por consola un texto de prueba.
+  let displayMenu = menu.map(function(item){
+    //console.log(item); //me muestra item por item
+
+    //return `<h1>${item.title}</h1>`;
+    return `<article class="menu-item">
+    <img src=${item.img} class="photo" alt="Menu Item">
+    <div class="item-info">
+      <header>
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price}</h4>
+      </header>
+      <p class="item-text">
+      ${item.desc}
+      </p>
+    </div>
+  </article>`;
+  })
+  displayMenu = displayMenu.join(""); //uno todos los items del array sincomas intermedias
+  //console.log(displayMenu);  //me muestra un array de items
+  sectionCenter.innerHTML = displayMenu; //esta línea hace la magia, y me agrega al html el join anterior que se guardó en displayMenu.
+});   
