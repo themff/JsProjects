@@ -71,21 +71,39 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Stake",
+    category: "late",
+    price: 16.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 
 const sectionCenter = document.querySelector(".section-center"); //este query selecciona al padre de todos mis menúes. Sería el contenedor
+const container = document.querySelector(".btn-container");
+//const filterBtns = document.querySelectorAll(".filter-btn"); //como abajo añadimos los botones de forma dinámica, ya no podemos acceder a esos botones de esta manera. hay que seleccionarlos DESPUES de que hayan sido añadidos completamente.
 
+//Load Items
 window.addEventListener("DOMContentLoaded",function(){
-  displayMenuItems(menu);
-});   
+  displayMenuItems(menu); //le paso como argumento el menu
+  displayMenuButtons();
+
+  
+});
+
+//filter
+
+
 
 function displayMenuItems(menuItems){
     //console.log("shake and bake");  //cuando carga la página (por eso selecciona el evento del window y mira el domcontentloader), impripe por consola un texto de prueba.
     let displayMenu = menuItems.map(function(item){
       //console.log(item); //me muestra item por item
   
-      //return `<h1>${item.title}</h1>`;
+      //return `<h1>${item.title}</h1>`  prueba de retorno de html;
       return `<article class="menu-item">
       <img src=${item.img} class="photo" alt="Menu Item">
       <div class="item-info">
@@ -103,4 +121,40 @@ function displayMenuItems(menuItems){
     //console.log(displayMenu);  //me muestra un array de items
     sectionCenter.innerHTML = displayMenu; //esta línea hace la magia, y me agrega al html el join anterior que se guardó en displayMenu.
   
+}
+
+function displayMenuButtons() {
+  const categories = menu.reduce(function(values,item){
+    if(!values.includes(item.category)){
+      values.push(item.category);
+    }
+return values;
+  },["all"])    //por el momento el array values solo contiene "all". el if dice, si lo que tengo en item.category no está dentro del array, lo pusheo.
+  //console.log(categories);
+  const categoryBtns = categories.map(function(category){
+    return `<button class="filter-btn" 
+    type="button" 
+    data-id=${category}>${category}</button>`
+  }).join("");
+  //console.log(categoryBtns);
+  container.innerHTML = categoryBtns;
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  filterBtns.forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      //console.log(e.currentTarget.dataset.id); //e es evento, dataset me entrega lo que hay en el data-id dentro de las clases del objeto. por ej si toco el botón all, me entra un all. Impresionante.
+      const category = e.currentTarget.dataset.id;
+      const menuCategory = menu.filter(function(menuItem){
+        if(menuItem.category === category){
+          return menuItem;
+        }     
+      })
+      //console.log(menuCategory);
+      if(category === "all"){
+        displayMenuItems(menu);
+      }
+      else{
+        displayMenuItems(menuCategory);
+      }
+    })
+  })
 }
