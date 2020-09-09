@@ -206,6 +206,8 @@ nav {
   width: 100%;
   background: var(--clr-white);
   box-shadow: var(--light-shadow);
+  
+  
 }
 .fixed-nav .links a {
   color: var(--clr-grey-1);
@@ -241,7 +243,7 @@ nav {
   transition: var(--transition);
 }
 .show-links {
-  height: 200px;
+  height: 200px; /* ojo que esta altura está hardcodeada */
 }
 .links a {
   background: var(--clr-white);
@@ -276,7 +278,7 @@ nav {
     display: none;
   }
   .links-container {
-    height: auto !important;
+    height: auto !important; /*importante para que se vean lindos los links en la barra*/
   }
   .links {
     display: flex;
